@@ -1,5 +1,5 @@
 m    	- message  
-e    	- random number generated to each message  
+e    	- random number generated separatly for each message  
 p, k	- two parts of private key  
 r	- radius * radius  
 C	- encrypted message    
