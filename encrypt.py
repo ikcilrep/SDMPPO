@@ -4,8 +4,7 @@ from fraction import Fraction
 
 
 def encrypt(m, p, k):
-    #e = Fraction(randint(k.a, k.a << 10))
-    e = Fraction(20)
+    e = Fraction(randint(k.a, k.a << 10))
     a = (e - k) / (m - p)
     b = e - m*a
     r = m*m + e*e
