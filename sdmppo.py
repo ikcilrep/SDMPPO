@@ -1,15 +1,8 @@
 from fraction import Fraction
 from random import randint
 from sys import argv
-def decrypt(x, y, p, k):
-    a = (y - k) / (x - p)
-    b = y - x*a
-    r = x*x + y*y
-    m = (b*b - r) / ((a*a + Fraction(1))*x)
-    e = a*m + b
-    return e
 
-def encrypt(m, e, p, k):
+def encrypt_or_decrypt(m, e, p, k):
     a = (e - k) / (m - p)
     b = e - m*a
     r = m*m + e*e
@@ -31,9 +24,9 @@ for i in range(0, len(args)):
         print("Konstrukcja argumentów powinna być taka: a/b albo a jeśli b = 1.")
         exit()
 if mode == '-e':
-    C = encrypt(args[0], args[1], args[2], args[3])
+    C = encrypt_or_decrypt(args[0], args[1], args[2], args[3])
     print("x = {}".format(C[0]))
     print("y = {}".format(C[1]))
 
 elif mode == '-d':
-    print("e = {}".format(decrypt(args[0], args[1], args[2], args[3])))
+    print("e = {}".format(encrypt_or_decrypt(args[0], args[1], args[2], args[3]))[0])
