@@ -1,26 +1,25 @@
-
 from random import randint
-from decimal import Decimal
+from fraction import Fraction
 
 
-def sq(a):
-    return a*a
-
-
-def decrypt(c, p, k):
-    m = c[0]
-    e = c[1]
-    p = Decimal(p)
-    k = Decimal(k)
+def decrypt(C, p, k):
+    e = C[1]
+    m = C[0]
     a = (e - k) / (m - p)
-    b = e - m * a
-    r = sq(m) + sq(e)
-    x = (sq(b) - r) / ((sq(a) + 1) * m)
-    return round(x)
+    b = e - m*a
+    r = m*m + e*e
+    x = (b*b - r) / ((a*a + Fraction(1))*m)
+    y = a*x + b
+    return x, y
 
-x = Decimal(input("Podaj wartość x:\t"))
-y = Decimal(input("Podaj wartość y:\t"))
-p = int(input("Podaj wartość p:\t"))
-k = int(input("Podaj wartość k:\t"))
+x = input("Podaj wartość x: ")
+y = input("Podaj wartość y: ")
+p = Fraction(int(input("Podaj wartość p: ")))
+k = Fraction(int(input("Podaj wartość k: ")))
 
-print("m = " + str(decrypt((x,y), p, k)))
+x = x.split("/")
+y = y.split("/")
+x = Fraction(int(x[0]), int(x[1]))
+y = Fraction(int(y[0]), int(y[1]))
+m = decrypt((x , y), p, k)
+print("m = {}".format(m[0]))
